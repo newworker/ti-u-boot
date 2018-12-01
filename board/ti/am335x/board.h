@@ -17,8 +17,9 @@
 #define board_is_bbg1() 0
 #define board_is_evm_sk() 0
 #define board_is_idk() 0
-#define board_is_gp_evm() 1
-#define board_is_evm_15_or_later() 1
+#define board_is_gp_evm() 0
+#define board_is_evm_15_or_later() 0
+#define board_is_vipoxmyd() 1
 #define board_is_icev2() 0
 #else
 static inline int board_is_bone(void)
@@ -55,6 +56,11 @@ static inline int board_is_evm_15_or_later(void)
 {
 	return (board_is_gp_evm() &&
 		strncmp("1.5", board_ti_get_rev(), 3) <= 0);
+}
+
+static inline int board_is_vipoxmyd(void)
+{
+	return board_ti_is("VIPOXMYD");
 }
 
 static inline int board_is_icev2(void)

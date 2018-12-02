@@ -140,6 +140,11 @@ static struct module_pin_mux gpio0_18_pin_mux[] = {
 	{-1},
 };
 
+static struct module_pin_mux gpio3_8_pin_mux[] = {
+	{OFFSET(emu1), (MODE(7) | PULLUDDIS)},	/* GPIO3_8 */
+	{-1},
+};
+
 static struct module_pin_mux rgmii1_pin_mux[] = {
 	{OFFSET(mii1_txen), MODE(2)},			/* RGMII1_TCTL */
 	{OFFSET(mii1_rxdv), MODE(2) | RXACTIVE},	/* RGMII1_RCTL */
@@ -369,6 +374,10 @@ void enable_board_pin_mux(void)
 			configure_module_pin_mux(mmc1_pin_mux);
 			configure_module_pin_mux(spi0_pin_mux);
 		}
+	} else if (board_is_vipoxmyd()) {
+		/* VIPOX MYD */
+		/*yzq: disable CAT823 - WDI by tri-stating */
+		configure_module_pin_mux(gpio3_8_pin_mux);
 	} else if (board_is_idk()) {
 		/* Industrial Motor Control (IDK) */
 		configure_module_pin_mux(mii1_pin_mux);

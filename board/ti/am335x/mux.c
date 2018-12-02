@@ -145,6 +145,11 @@ static struct module_pin_mux gpio3_8_pin_mux[] = {
 	{-1},
 };
 
+static struct module_pin_mux gpio3_19_pin_mux[] = {
+	{OFFSET(mcasp0_fsr), (MODE(7) | RXACTIVE | PULLUP_EN)},	/* GPIO3_19 */
+	{-1},
+};
+
 static struct module_pin_mux rgmii1_pin_mux[] = {
 	{OFFSET(mii1_txen), MODE(2)},			/* RGMII1_TCTL */
 	{OFFSET(mii1_rxdv), MODE(2) | RXACTIVE},	/* RGMII1_RCTL */
@@ -402,6 +407,9 @@ void enable_board_pin_mux(void)
 #endif
 		configure_module_pin_mux(rgmii1_pin_mux);
 		configure_module_pin_mux(rgmii2_pin_mux);
+		configure_module_pin_mux(mmc0_no_cd_pin_mux);
+		/*yzq: GPIO3_19 = MMC0_CD */
+		configure_module_pin_mux(gpio3_19_pin_mux);
 	} else if (board_is_idk()) {
 		/* Industrial Motor Control (IDK) */
 		configure_module_pin_mux(mii1_pin_mux);

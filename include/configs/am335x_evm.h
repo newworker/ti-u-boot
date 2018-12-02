@@ -151,6 +151,8 @@
 			"setenv fdtfile am335x-bonegreen.dtb; fi; " \
 		"if test $board_name = A33515BB; then " \
 			"setenv fdtfile am335x-evm.dtb; fi; " \
+		"if test $board_name = VIPOXMYD; then " \
+			"setenv fdtfile am335x-vipoxmyd.dtb; fi; " \
 		"if test $board_name = A335X_SK; then " \
 			"setenv fdtfile am335x-evmsk.dtb; fi; " \
 		"if test $board_name = A335_ICE; then " \

@@ -883,6 +883,8 @@ int board_fit_config_name_match(const char *name)
 {
 	if (board_is_gp_evm() && !strcmp(name, "am335x-evm"))
 		return 0;
+	else if (board_is_vipoxmyd() && !strcmp(name, "am335x-vipoxmyd"))
+		return 0;
 	else if (board_is_bone() && !strcmp(name, "am335x-bone"))
 		return 0;
 	else if (board_is_bone_lt() && !strcmp(name, "am335x-boneblack"))

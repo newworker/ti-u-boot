@@ -273,7 +273,7 @@ void am33xx_spl_board_init(void)
 	/* Get the frequency */
 	dpll_mpu_opp100.m = am335x_get_efuse_mpu_max_freq(cdev);
 
-	if (board_is_bone() || board_is_bone_lt()) {
+	if (board_is_bone() || board_is_bone_lt() || board_is_vipoxmyd()) {
 		/* BeagleBone PMIC Code */
 		int usb_cur_lim;
 
@@ -327,11 +327,20 @@ void am33xx_spl_board_init(void)
 				       TPS65217_USB_INPUT_CUR_LIMIT_MASK))
 			puts("tps65217_reg_write failure\n");
 
-		/* Set DCDC3 (CORE) voltage to 1.125V */
-		if (tps65217_voltage_update(TPS65217_DEFDCDC3,
-					    TPS65217_DCDC_VOLT_SEL_1125MV)) {
-			puts("tps65217_voltage_update failure\n");
-			return;
+		if (board_is_vipoxmyd()) {
+			/* Set DCDC3 (CORE) voltage to 1.100V */
+			if (tps65217_voltage_update(TPS65217_DEFDCDC3,
+							TPS65217_DCDC_VOLT_SEL_1100MV)) {
+				puts("tps65217_voltage_update failure\n");
+				return;
+			}
+		} else {
+			/* Set DCDC3 (CORE) voltage to 1.125V */
+			if (tps65217_voltage_update(TPS65217_DEFDCDC3,
+						    TPS65217_DCDC_VOLT_SEL_1125MV)) {
+				puts("tps65217_voltage_update failure\n");
+				return;
+			}
 		}
 
 		/* Set CORE Frequencies to OPP100 */

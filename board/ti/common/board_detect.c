@@ -168,7 +168,7 @@ int __maybe_unused ti_i2c_eeprom_am_get(int bus_addr, int dev_addr)
 		strlcpy(am_ep.name, "VIPOXMYD", TI_EEPROM_HDR_NAME_LEN + 1);
 		strlcpy(am_ep.version, "2018", TI_EEPROM_HDR_REV_LEN + 1);
 		strlcpy(am_ep.serial, "1201", TI_EEPROM_HDR_SERIAL_LEN + 1);
-		strlcpy(am_ep.config, "?", TI_EEPROM_HDR_SERIAL_LEN + 1);
+		strlcpy(am_ep.config, "?", TI_EEPROM_HDR_CONFIG_LEN + 1);
 		memcpy(am_ep.mac_addr, "\x10\x11\x12\x13\x14\x15\x20\x21\x22\x23\x24\x25\x30\x31\x32\x33\x34\x35",
 			   TI_EEPROM_HDR_NO_OF_MAC_ADDR * TI_EEPROM_HDR_ETH_ALEN);
 	}

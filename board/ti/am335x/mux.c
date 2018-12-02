@@ -140,8 +140,18 @@ static struct module_pin_mux gpio0_18_pin_mux[] = {
 	{-1},
 };
 
+static struct module_pin_mux gpio3_7_pin_mux[] = {
+	{OFFSET(emu0), (MODE(7) | PULLUP_EN)},	/* GPIO3_7 */
+	{-1},
+};
+
 static struct module_pin_mux gpio3_8_pin_mux[] = {
 	{OFFSET(emu1), (MODE(7) | PULLUDDIS)},	/* GPIO3_8 */
+	{-1},
+};
+
+static struct module_pin_mux gpio3_18_pin_mux[] = {
+	{OFFSET(mcasp0_aclkr), (MODE(7) | PULLUP_EN)},	/* GPIO3_18 */
 	{-1},
 };
 
@@ -408,8 +418,11 @@ void enable_board_pin_mux(void)
 		configure_module_pin_mux(rgmii1_pin_mux);
 		configure_module_pin_mux(rgmii2_pin_mux);
 		configure_module_pin_mux(mmc0_no_cd_pin_mux);
+		/*yzq: GPIO3_18 was error set to MMC0_WP by mmc0_no_cd_pin_mux, so reset it */
+		configure_module_pin_mux(gpio3_18_pin_mux);
 		/*yzq: GPIO3_19 = MMC0_CD */
 		configure_module_pin_mux(gpio3_19_pin_mux);
+		configure_module_pin_mux(gpio3_7_pin_mux);
 	} else if (board_is_idk()) {
 		/* Industrial Motor Control (IDK) */
 		configure_module_pin_mux(mii1_pin_mux);

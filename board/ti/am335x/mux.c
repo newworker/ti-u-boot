@@ -196,6 +196,24 @@ static struct module_pin_mux rmii1_pin_mux[] = {
 	{-1},
 };
 
+static struct module_pin_mux rgmii2_pin_mux[] = {
+	{OFFSET(gpmc_a0), MODE(2)},			/* RGMII2_TCTL */
+	{OFFSET(gpmc_a1), MODE(2) | RXACTIVE},		/* RGMII2_RCTL */
+	{OFFSET(gpmc_a2), MODE(2)},			/* RGMII2_TD3 */
+	{OFFSET(gpmc_a3), MODE(2)},			/* RGMII2_TD2 */
+	{OFFSET(gpmc_a4), MODE(2)},			/* RGMII2_TD1 */
+	{OFFSET(gpmc_a5), MODE(2)},			/* RGMII2_TD0 */
+	{OFFSET(gpmc_a6), MODE(2)},			/* RGMII2_TCLK */
+	{OFFSET(gpmc_a7), MODE(2) | RXACTIVE},		/* RGMII2_RCLK */
+	{OFFSET(gpmc_a8), MODE(2) | RXACTIVE},		/* RGMII2_RD3 */
+	{OFFSET(gpmc_a9), MODE(2) | RXACTIVE},		/* RGMII2_RD2 */
+	{OFFSET(gpmc_a10), MODE(2) | RXACTIVE},		/* RGMII2_RD1 */
+	{OFFSET(gpmc_a11), MODE(2) | RXACTIVE},		/* RGMII2_RD0 */
+	{OFFSET(mdio_data), MODE(0) | RXACTIVE | PULLUP_EN}, /* MDIO_DATA */
+	{OFFSET(mdio_clk), MODE(0) | PULLUP_EN},	/* MDIO_CLK */
+	{-1},
+};
+
 #ifdef CONFIG_NAND
 static struct module_pin_mux nand_pin_mux[] = {
 	{OFFSET(gpmc_ad0),	(MODE(0) | PULLUDDIS | RXACTIVE)}, /* AD0  */
@@ -382,6 +400,8 @@ void enable_board_pin_mux(void)
 #ifdef CONFIG_NAND
 		configure_module_pin_mux(nand_pin_mux);
 #endif
+		configure_module_pin_mux(rgmii1_pin_mux);
+		configure_module_pin_mux(rgmii2_pin_mux);
 	} else if (board_is_idk()) {
 		/* Industrial Motor Control (IDK) */
 		configure_module_pin_mux(mii1_pin_mux);

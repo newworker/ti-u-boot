@@ -378,6 +378,10 @@ void enable_board_pin_mux(void)
 		/* VIPOX MYD */
 		/*yzq: disable CAT823 - WDI by tri-stating */
 		configure_module_pin_mux(gpio3_8_pin_mux);
+		configure_module_pin_mux(i2c1_pin_mux);
+#ifdef CONFIG_NAND
+		configure_module_pin_mux(nand_pin_mux);
+#endif
 	} else if (board_is_idk()) {
 		/* Industrial Motor Control (IDK) */
 		configure_module_pin_mux(mii1_pin_mux);

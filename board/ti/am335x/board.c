@@ -195,6 +195,17 @@ static struct emif_regs ddr3_emif_reg_data = {
 				PHY_EN_DYN_PWRDN,
 };
 
+static struct emif_regs ddr3_vipoxmyd_emif_reg_data = {
+	.sdram_config = MT41K128MJT187E_EMIF_SDCFG,
+	.ref_ctrl = MT41K128MJT187E_EMIF_SDREF,
+	.sdram_tim1 = MT41K128MJT187E_EMIF_TIM1,
+	.sdram_tim2 = MT41K128MJT187E_EMIF_TIM2,
+	.sdram_tim3 = MT41K128MJT187E_EMIF_TIM3,
+	.zq_config = MT41K128MJT187E_ZQ_CFG,
+	.emif_ddr_phy_ctlr_1 = MT41K128MJT187E_EMIF_READ_LATENCY |
+				PHY_EN_DYN_PWRDN,
+};
+
 static struct emif_regs ddr3_beagleblack_emif_reg_data = {
 	.sdram_config = MT41K256M16HA125E_EMIF_SDCFG,
 	.ref_ctrl = MT41K256M16HA125E_EMIF_SDREF,
@@ -487,6 +498,9 @@ void sdram_init(void)
 	else if (board_is_evm_15_or_later())
 		config_ddr(303, &ioregs_evm15, &ddr3_evm_data,
 			   &ddr3_evm_cmd_ctrl_data, &ddr3_evm_emif_reg_data, 0);
+	else if (board_is_vipoxmyd())
+		config_ddr(303, &ioregs_evmsk, &ddr3_data,
+			   &ddr3_cmd_ctrl_data, &ddr3_vipoxmyd_emif_reg_data, 0);
 	else if (board_is_icev2())
 		config_ddr(400, &ioregs_evmsk, &ddr3_icev2_data,
 			   &ddr3_icev2_cmd_ctrl_data, &ddr3_icev2_emif_reg_data,
